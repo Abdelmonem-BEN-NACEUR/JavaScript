@@ -8,26 +8,17 @@
 
 <script type="text/javascript">
 
-    // Tableau des unités
     var unites = ['zéro', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit',
         'neuf', 'dix', 'onze', 'douze', 'treize', 'quatorze', 'quinze', 'seize', 'dix-sept',
         'dix-huit', 'dix-neuf'];
-    // Tableau des dizaines
     var dizaines = ['', '', 'vingt', 'trente', 'Quarante', 'Cinquante', 'Soixante', 'Soixante-dix', 'Quatre-vingts', 'Quatre-vingt-dix', 'cent'];
 
 
     function transform(entree) {
-        // var element_saise = parseInt(prompt('donner un chiffre ou un nombre à convertir en lettres'));
         var details = {};
         var chiffres_en_lettre = '';
-        // details.centaines = parseInt(element_saise / 100);
         details.dizaine = parseInt(entree / 10);
         details.unites = entree % 10;
-
-        // console.log('dizaines :' + details.dizaine);
-        // console.log('unitées :' + details.unites);
-        // console.log('centaines :' + details.centaines);
-        // break;
         if (details.dizaine === 7) {
             if (details.unites === 0) {
                 chiffres_en_lettre = dizaines[details.dizaine];
@@ -71,12 +62,29 @@
             var element_saise = parseInt(prompt('donner un chiffre ou un nombre à convertir en lettres entre (0 et 999) :'));
         } while (isNaN(element_saise) || element_saise < 0 || element_saise > 999);
         var centaines = parseInt(element_saise / 100);
+        if (centaines !== 0) {
+            if (element_saise % 100 === 0) {
+                if (element_saise === 100) {
+                    alert('cent');
+                    continue;
+                }
+
+                else {
+
+                    alert(unites[centaines] + ' cent ');
+                    continue;
+                }
+            }
+        }
+
         if (centaines === 0)
             alert(transform(element_saise));
         else if (centaines === 1)
-            alert('cent ' + transform(element_saise-100));
+            alert('cent ' + transform(element_saise - 100));
         else
             alert(unites[centaines] + ' cent ' + transform(element_saise - (centaines * 100)));
+
+
     } while (confirm('Continuer la conversion?'));
 
 </script>
