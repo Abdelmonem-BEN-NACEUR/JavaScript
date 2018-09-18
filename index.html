@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+    // Tableau des unités
+
+    var unites = ['zéro', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit',
+        'neuf', 'dix', 'onze', 'douze', 'treize', 'quatorze', 'quinze', 'seize', 'dix-sept',
+        'dix-huit', 'dix-neuf'];
+
+    // Tableau des dizaines
+
+    var dizaines = ['', '', 'vingt', 'trente', 'Quarante', 'Cinquante', 'Soixante', 'Soixante-dix', 'Quatre-vingts', 'Quatre-vingt-dix', 'cent'];
+    var chiffres_en_lettre = '';
+    do {
+        do {
+            var element_saise = parseInt(prompt('donner un chiffre ou un nombre à convertir en lettres entre (0 et 999) :'), 10);
+        } while (isNaN(element_saise) || element_saise < 0 || element_saise > 999);
+
+        var details = {};
+        details.centaines = parseInt(element_saise / 100);
+        details.dizaine = parseInt((element_saise - 100 * details.centaines) / 10);
+        details.unites = element_saise % 10;
+
+        if (details.dizaine !== 0) {
+            if (details.dizaine === 7) {
+                if (details.unites === 0) {
+                    chiffres_en_lettre = dizaines[details.dizaine];
+                } else if (details.unites === 1) {
+                    chiffres_en_lettre = dizaines[details.dizaine - 1] + '-et-' + unites[details.unites + 10];
+                } else {
+                    chiffres_en_lettre = dizaines[details.dizaine - 1] + '-' + unites[details.unites + 10];
+                }
+                if (details.centaines === 0) {
+                    alert(chiffres_en_lettre);
+                } else if (details.centaines === 1) {
+                    alert('cent ' + chiffres_en_lettre);
+                } else {
+                    alert(unites[details.centaines] + ' cent ' + chiffres_en_lettre);
+                }
+
+                continue;
+            }
+
+            if (details.dizaine === 9) {
+                if (details.unites === 0) {
+                    chiffres_en_lettre = dizaines[details.dizaine];
+                } else if (details.unites === 1) {
+                    chiffres_en_lettre = dizaines[details.dizaine - 1] + '-et-' + unites[details.unites + 10];
+                } else {
+                    chiffres_en_lettre = dizaines[details.dizaine - 1] + '-' + unites[details.unites + 10];
+                }
+                if (details.centaines === 0) {
+                    alert(chiffres_en_lettre);
+                } else if (details.centaines === 1) {
+                    alert('cent ' + chiffres_en_lettre);
+                } else {
+                    alert(unites[details.centaines] + ' cent ' + chiffres_en_lettre);
+                }
+
+                continue;
+            }
+            if (details.dizaine < 2) {
+                chiffres_en_lettre = unites[element_saise];
+            }
+            else {
+                if (details.unites !== 0) {
+                    if (details.unites === 1)
+                        chiffres_en_lettre = dizaines[details.dizaine] + '-et-' + unites[details.unites];
+                    else
+                        chiffres_en_lettre = dizaines[details.dizaine] + '-' + unites[details.unites];
+                } else if (details.unites === 0) {
+                    chiffres_en_lettre = dizaines[details.dizaine];
+                }
+            }
+            if (details.centaines === 0) {
+                alert(chiffres_en_lettre);
+            } else if (details.centaines === 1) {
+                alert('cent ' + chiffres_en_lettre);
+            } else {
+                alert(unites[details.centaines] + ' cent ' + chiffres_en_lettre);
+            }
+        } else {
+
+            if (details.centaines !== 0) {
+                if (details.centaines === 1) {
+                    if (details.unites !== 0)
+                        alert('cent ' + unites[details.unites]);
+                    else
+                        alert('cent ');
+                } else {
+                    if (details.unites !== 0) {
+                        alert(unites[details.centaines] + ' cent ' + unites[details.unites]);
+
+                    } else {
+                        alert(unites[details.centaines] + ' cent ');
+
+                    }
+                }
+
+            }
+
+        }
+    } while (confirm('Continuer la conversion?'));
+
+</script>
+</body>
+</html>
